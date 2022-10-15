@@ -10,8 +10,8 @@ import (
 	"github.com/gocolly/colly"
 )
 
-type destURL struct {
-	city            string
+type DestURL struct {
+	City            string
 	NORoomsFrom     int
 	NORoomsTo       int
 	TotalAreaFrom   int
@@ -51,8 +51,8 @@ func main() {
 	})
 
 	// var dest destURL
-	destKZ := destURL{
-		city:            "alma-ata",
+	destKZ := DestURL{
+		City:            "alma-ata",
 		NORoomsFrom:     2,
 		NORoomsTo:       2,
 		TotalAreaFrom:   40,
@@ -65,7 +65,7 @@ func main() {
 
 	urlKZ := fmt.Sprintf(
 		"https://www.olx.kz/d/nedvizhimost/kvartiry/prodazha/%s/?search[filter_float_number_of_rooms:from]=%d&search[filter_float_number_of_rooms:to]=%d&search[filter_float_total_area:from]=%d&search[filter_float_total_area:to]=%d&search[filter_float_floor:from]=%d&search[filter_float_floor:to]=%d&search[filter_float_total_floors:from]=%d&search[filter_float_total_floors:to]=%d",
-		destKZ.city,
+		destKZ.City,
 		destKZ.NORoomsFrom,
 		destKZ.NORoomsTo,
 		destKZ.TotalAreaFrom,
