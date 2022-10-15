@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
@@ -40,6 +42,7 @@ func main() {
 	c.Visit("https://www.olx.kz/d/nedvizhimost/kvartiry/prodazha/alma-ata/?search%5Bfilter_float_number_of_rooms:from%5D=2&search%5Bfilter_float_number_of_rooms:to%5D=2&search%5Bfilter_float_floor:to%5D=2")
 
 	fmt.Printf("Average price: %d", avgPrice(prices))
+	outJSON(prices)
 }
 
 func cleanStr(s string) (int, error) {
@@ -69,4 +72,13 @@ func avgPrice(prices []int) int {
 	} else {
 		return 0
 	}
+}
+
+func outJSON(prices []int) {
+	content, err := json.Marshal(prices)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	os.WriteFile("data.json", content, 0644)
 }
