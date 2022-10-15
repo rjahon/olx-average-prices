@@ -10,6 +10,18 @@ import (
 	"github.com/gocolly/colly"
 )
 
+type destURL struct {
+	city            string
+	NORoomsFrom     int
+	NORoomsTo       int
+	TotalAreaFrom   int
+	TotalAreaTo     int
+	FloorFrom       int
+	FloorTo         int
+	TotalFloorsFrom int
+	TotalFloorsTo   int
+}
+
 func main() {
 	c := colly.NewCollector(
 		colly.AllowedDomains(
@@ -38,8 +50,33 @@ func main() {
 		fmt.Printf("Visiting: %s\n\n", r.URL.String())
 	})
 
-	// kz
-	c.Visit("https://www.olx.kz/d/nedvizhimost/kvartiry/prodazha/alma-ata/?search%5Bfilter_float_number_of_rooms:from%5D=2&search%5Bfilter_float_number_of_rooms:to%5D=2&search%5Bfilter_float_floor:to%5D=2")
+	// var dest destURL
+	destKZ := destURL{
+		city:            "almaty",
+		NORoomsFrom:     2,
+		NORoomsTo:       2,
+		TotalAreaFrom:   20,
+		TotalAreaTo:     90,
+		FloorFrom:       2,
+		FloorTo:         4,
+		TotalFloorsFrom: 2,
+		TotalFloorsTo:   18,
+	}
+
+	urlKZ := fmt.Sprintf(
+		"https://www.olx.kz/d/nedvizhimost/kvartiry/prodazha/%s/?search[filter_float_number_of_rooms:from]=%d&search[filter_float_number_of_rooms:to]=%d&search[filter_float_total_area:from]=%d&search[filter_float_total_area:to]=%d&search[filter_float_floor:from]=%d&search[filter_float_floor:to]=%d&search[filter_float_total_floors:from]=%d&search[filter_float_total_floors:to]=%d",
+		destKZ.city,
+		destKZ.NORoomsFrom,
+		destKZ.NORoomsTo,
+		destKZ.TotalAreaFrom,
+		destKZ.TotalAreaTo,
+		destKZ.FloorFrom,
+		destKZ.FloorTo,
+		destKZ.TotalFloorsFrom,
+		destKZ.TotalFloorsTo,
+	)
+
+	c.Visit(urlKZ)
 
 	fmt.Printf("Average price: %d", avgPrice(prices))
 	outJSON(prices)
