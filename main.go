@@ -52,15 +52,15 @@ func main() {
 
 	// var dest destURL
 	destKZ := destURL{
-		city:            "almaty",
+		city:            "alma-ata",
 		NORoomsFrom:     2,
 		NORoomsTo:       2,
-		TotalAreaFrom:   20,
-		TotalAreaTo:     90,
+		TotalAreaFrom:   40,
+		TotalAreaTo:     80,
 		FloorFrom:       2,
-		FloorTo:         4,
-		TotalFloorsFrom: 2,
-		TotalFloorsTo:   18,
+		FloorTo:         3,
+		TotalFloorsFrom: 4,
+		TotalFloorsTo:   7,
 	}
 
 	urlKZ := fmt.Sprintf(
